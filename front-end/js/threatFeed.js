@@ -32,7 +32,6 @@ async function loadThreatFeed() {
 
       container.appendChild(div);
     });
-
   } catch (error) {
     console.error("Threat feed error:", error);
     const container = document.getElementById("threat-feed");
