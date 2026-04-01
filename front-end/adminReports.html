@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Reports - CyberShield</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #222;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #2c7be5;
+      color: white;
+    }
+
+    select, input {
+      padding: 6px;
+      width: 90%;
+    }
+
+    button {
+      padding: 7px 12px;
+      margin: 2px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .save-btn {
+      background: green;
+      color: white;
+    }
+
+    .delete-btn {
+      background: red;
+      color: white;
+    }
+
+    .back-btn {
+      background: #2c7be5;
+      color: white;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="window.location.href='dashboard.html'">Back to Dashboard</button>
+
+  <h1>Admin Reports Management</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Incident Type</th>
+        <th>Severity</th>
+        <th>Status</th>
+        <th>Admin Remark</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="reportTableBody"></tbody>
+  </table>
+
+  <script src="./Js/adminReports.js"></script>
+</body>
+</html>

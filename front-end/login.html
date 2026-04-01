@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Cyber Sentinel</title>
+</head>
+<body>
+  <h2>Login with Username and Password</h2>
+
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <hr>
+
+  <h3>Login with Phone OTP</h3>
+
+  <form id="otpSendForm">
+    <input type="text" id="phone" placeholder="+919876543210" required><br><br>
+    <button type="submit">Send OTP</button>
+  </form>
+
+  <br>
+
+  <form id="otpVerifyForm">
+    <input type="text" id="otpCode" placeholder="Enter OTP" required><br><br>
+    <button type="submit">Verify OTP</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (data.message === "Login successful") {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", username);
+        window.location.href = "dashboard.html";
+      } else {
+        document.getElementById("message").innerText = data.message;
+      }
+    });
+
+    document.getElementById("otpSendForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const phone = document.getElementById("phone").value.trim();
+
+      const res = await fetch("/api/send-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ phone })
+      });
+
+      const data = await res.json();
+      document.getElementById("message").innerText = data.message;
+    });
+
+    document.getElementById("otpVerifyForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const phone = document.getElementById("phone").value.trim();
+      const code = document.getElementById("otpCode").value.trim();
+
+      const res = await fetch("/api/verify-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ phone, code })
+      });
+
+      const data = await res.json();
+
+      if (data.message === "OTP verified successfully") {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.username || phone);
+        window.location.href = "dashboard.html";
+      } else {
+        document.getElementById("message").innerText = data.message;
+      }
+    });
+  </script>
+</body>
+</html>

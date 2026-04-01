@@ -1,0 +1,60 @@
+body {
+  background: #0d1117;
+  color: #00ff9f;
+}
+
+h1, h2 {
+  color: #00ff9f;
+}
+
+button {
+  background: black;
+  color: #00ff9f;
+  border: 1px solid #00ff9f;
+}
+/* MAIN CENTER BOX */
+.container {
+    background: rgb(202, 128, 128);
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* Keep your styles */
+header {
+    background: #2c7be5;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: #f7f8f8;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section {
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    color: #f8f6f6;
+    font-weight: bold;
+}
+/* Responsive for smaller screens */
+@media screen and (max-width: 500px) {
+    nav a.btn {
+        width: 80%;
+        margin: 10px 0;
+        padding: 12px 0;
+    }
+}
