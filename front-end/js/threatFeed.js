@@ -1,4 +1,4 @@
-const threatFeedDiv = document.getElementById("threatFeed");
+const threatFeedDiv = document.getElementById("threat-feed");
 
 async function loadThreatFeed() {
   try {
@@ -6,6 +6,12 @@ async function loadThreatFeed() {
     const data = await res.json();
 
     const container = document.getElementById("threat-feed");
+
+    if (!container) {
+      console.error("Container not found");
+      return;
+    }
+
     container.innerHTML = "";
 
     if (!data.articles || data.articles.length === 0) {
@@ -18,7 +24,7 @@ async function loadThreatFeed() {
       div.className = "threat-card";
 
       div.innerHTML = `
-        <h3>${article.title}</h3>
+        <h3>${article.title || "No title"}</h3>
         <p>${article.description || "No description available"}</p>
         <a href="${article.url}" target="_blank">Read more</a>
         <hr/>
@@ -28,8 +34,11 @@ async function loadThreatFeed() {
     });
 
   } catch (error) {
-    console.error(error);
-    document.getElementById("threat-feed").innerHTML = "<p>Error loading threats</p>";
+    console.error("Threat feed error:", error);
+    const container = document.getElementById("threat-feed");
+    if (container) {
+      container.innerHTML = "<p>Error loading threats</p>";
+    }
   }
 }
 
